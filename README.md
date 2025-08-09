@@ -28,24 +28,24 @@ información de forma modular.
 
 ## Documentos incluidos
 
-- [ARCHITECTURE.md](ARCHITECTURE.md) – Describe la estructura y componentes del sistema, cómo
+- [architecture.md](architecture.md) – Describe la estructura y componentes del sistema, cómo
   interactúan y las decisiones técnicas que guían su evolución.
-- [DATABASE.md](DATABASE.md) – Documenta las estructuras de datos persistentes, sus campos, tipos,
+- [database.md](database.md) – Documenta las estructuras de datos persistentes, sus campos, tipos,
   relaciones y convenciones de modelado utilizadas.
-- [DATABASE_ER.md](DATABASE_ER.md) – Incluye diagramas que representan visualmente tablas, campos y
+- [database-er.md](database-er.md) – Incluye diagramas que representan visualmente tablas, campos y
   relaciones o estructuras no relacionales.
-- [TESTING.md](TESTING.md) – Define la estrategia de pruebas, tipos de test, herramientas y
+- [testing.md](testing.md) – Define la estrategia de pruebas, tipos de test, herramientas y
   convenciones para garantizar la calidad del software.
-- [SECURITY.md](SECURITY.md) – Enumera políticas, prácticas y estándares de seguridad que protegen
+- [security.md](security.md) – Enumera políticas, prácticas y estándares de seguridad que protegen
   datos, accesos y la integridad del sistema.
-- [CODE_GUIDELINES.md](CODE_GUIDELINES.md) – Establece reglas de estilo, modularidad, manejo de
+- [code-guidelines.md](code-guidelines.md) – Establece reglas de estilo, modularidad, manejo de
   errores y convenciones para escribir código consistente.
-- [DEPLOYMENT.md](DEPLOYMENT.md) – Detalla los pasos, entornos, herramientas y validaciones
+- [deployment.md](deployment.md) – Detalla los pasos, entornos, herramientas y validaciones
   necesarias para un despliegue seguro y controlado.
-- [OBSERVABILITY.md](OBSERVABILITY.md) – Define cómo se monitorea el sistema, qué métricas se siguen
+- [observability.md](observability.md) – Define cómo se monitorea el sistema, qué métricas se siguen
   y cómo se gestionan alertas y eventos críticos.
-- [TASKS_GUIDELINES.md](TASKS_GUIDELINES.md) – Explica cómo redactar y estructurar tareas en formato
+- [tasks-guidelines.md](tasks-guidelines.md) – Explica cómo redactar y estructurar tareas en formato
   compatible con el copiloto para ejecución asistida.
-- [MARKDOWN_GUIDELINES.md](MARKDOWN_GUIDELINES.md)– Convenciones y buenas prácticas para escribir
+- [markdown-guidelines.md](markdown-guidelines.md)– Convenciones y buenas prácticas para escribir
   archivos Markdown en el proyecto, orientadas a garantizar claridad y consistencia tanto para
   lectores humanos como para copilotos.

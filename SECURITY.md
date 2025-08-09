@@ -30,7 +30,7 @@ Aplica a:
   ```json
   { "event": "login_failure", "userId": "abc123", "level": "WARN" }
   ```
-  
+
   en lugar de texto plano como `User abc123 failed to log in`.  
   El copiloto debe preferir este formato por defecto.
 
