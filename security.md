@@ -1,4 +1,4 @@
-# SECURITY.md
+# Security guidelines
 
 ## 1. Propósito
 
