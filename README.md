@@ -26,7 +26,7 @@ información de forma modular.
 
 ---
 
-## 📄 Documentos incluidos
+## Documentos incluidos
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) – Describe la estructura y componentes del sistema, cómo
   interactúan y las decisiones técnicas que guían su evolución.
