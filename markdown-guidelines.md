@@ -131,3 +131,42 @@ Ejemplo:
   compatibilidad.
 - Usa enlaces internos con anclas (`[Texto](#seccion)`) en documentos largos para facilitar la
   navegación.
+
+---
+
+## Herramientas de validación y formateo
+
+Para asegurar que las reglas de este documento se apliquen de forma consistente:
+
+- **Prettier**  
+  Usar con la configuración por defecto para Markdown:
+
+  ```bash
+  prettier --write "filename.md"
+  ```
+
+  Ajustar las reglas necesarias en `.prettierrc` (por ejemplo, `printWidth: 100`).
+
+- **markdownlint**  
+  Instalar y configurar en `.markdownlint.json` para validar las reglas definidas aquí.
+
+- **Pre-commit**  
+  Configurar un hook de pre-commit para ejecutar tareas de validación y formateo antes de confirmar
+  cambios. Esto puede incluir formateo de código, validación de estilo, ejecución de linters,
+  pruebas unitarias u otras verificaciones necesarias.
+
+  Ejemplo para formatear y validar archivos Markdown usando Husky:
+
+  ```bash
+  npx husky add .husky/pre-commit "npx prettier --write '**/*.md' && npx markdownlint '**/*.md'"
+  git add .husky/pre-commit
+  ```
+
+  Esto garantiza que todos los archivos `.md` se formateen y validen automáticamente antes de cada
+  commit.
+
+- **Integración con VS Code**
+  - Instalar las extensiones **Prettier** y **markdownlint**.
+  - Activar `"editor.formatOnSave": true` y definir Prettier como formateador por defecto para
+    Markdown.
+  - Así el formateo se aplica al guardar y Husky lo valida antes del commit.
