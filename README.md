@@ -28,6 +28,8 @@ información de forma modular.
 
 ## Documentos incluidos
 
+### Contexto técnico
+
 - [architecture.md](architecture.md) – Describe la estructura y componentes del sistema, cómo
   interactúan y las decisiones técnicas que guían su evolución.
 - [database.md](database.md) – Documenta las estructuras de datos persistentes, sus campos, tipos,
@@ -44,8 +46,17 @@ información de forma modular.
   necesarias para un despliegue seguro y controlado.
 - [observability.md](observability.md) – Define cómo se monitorea el sistema, qué métricas se siguen
   y cómo se gestionan alertas y eventos críticos.
-- [tasks-guidelines.md](tasks-guidelines.md) – Explica cómo redactar y estructurar tareas en formato
-  compatible con el copiloto para ejecución asistida.
+
+### Guías generales
+
 - [markdown-guidelines.md](markdown-guidelines.md)– Convenciones y buenas prácticas para escribir
   archivos Markdown en el proyecto, orientadas a garantizar claridad y consistencia tanto para
   lectores humanos como para copilotos.
+
+### Guías para backlog (épicas y tareas)
+
+- [epics-guidelines.md](epics-guidelines.md) – Explica cómo redactar y estructurar épicas en formato
+  compatible con el copiloto, alineando la visión de negocio con la ejecución técnica y manteniendo
+  trazabilidad con las tareas asociadas.
+- [tasks-guidelines.md](tasks-guidelines.md) – Explica cómo redactar y estructurar tareas en formato
+  compatible con el copiloto para ejecución asistida.
