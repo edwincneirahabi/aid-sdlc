@@ -170,3 +170,29 @@ Para asegurar que las reglas de este documento se apliquen de forma consistente:
   - Activar `"editor.formatOnSave": true` y definir Prettier como formateador por defecto para
     Markdown.
   - Así el formateo se aplica al guardar y Husky lo valida antes del commit.
+
+---
+
+## Validación automática de numeración y unicidad de IDs en backlog
+
+Para asegurar que los archivos del backlog (`task-XXXXX.md` y `epic-XXXXX.md`) cumplan las reglas
+definidas en `tasks-guidelines.md`, se recomienda configurar una validación automática mediante
+pre-commit hook o CI.
+
+**Reglas a validar:**
+
+- El nombre de archivo debe seguir la convención:
+  - `task-00001.md`
+  - `epic-00001.md`
+- El número (`00001`) debe tener cinco dígitos con ceros a la izquierda.
+- No puede existir el mismo número para más de un archivo, sin importar el tipo.
+- El campo `id` en `index.yaml` debe coincidir con el número en el nombre de archivo.
+- El valor de `type` en `index.yaml` debe ser `task` o `epic`, según corresponda.
+
+**Ejemplo de integración con Husky:**
+
+```bash
+npx husky add .husky/pre-commit \
+"scripts/validate-backlog-ids.sh && npx prettier --write '**/*.md' && npx markdownlint '**/*.md'"
+git add .husky/pre-commit
+```
