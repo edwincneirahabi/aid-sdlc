@@ -40,8 +40,13 @@ información de forma modular.
   convenciones para garantizar la calidad del software.
 - [security.md](security.md) – Enumera políticas, prácticas y estándares de seguridad que protegen
   datos, accesos y la integridad del sistema.
-- [code-guidelines.md](code-guidelines.md) – Establece reglas de estilo, modularidad, manejo de
-  errores y convenciones para escribir código consistente.
+- [python-code-guidelines.md](python-code-guidelines.md) – Define el estándar para escribir y
+  mantener código Python, incluyendo reglas de estilo, configuración de linters, formateadores,
+  validadores, manejo de errores y pruebas, con el submódulo `.code_quality` como dependencia
+  obligatoria.
+- [frontend-code-guidelines.md](frontend-code-guidelines.md) – Define el estándar para escribir y
+  mantener código de frontend, incluyendo convenciones de estilo, estructura de componentes,
+  validaciones, seguridad y pruebas específicas para proyectos de interfaz.
 - [deployment.md](deployment.md) – Detalla los pasos, entornos, herramientas y validaciones
   necesarias para un despliegue seguro y controlado.
 - [observability.md](observability.md) – Define cómo se monitorea el sistema, qué métricas se siguen
