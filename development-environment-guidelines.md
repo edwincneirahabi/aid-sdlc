@@ -27,14 +27,6 @@ Este documento detalla los lineamientos de configuración para el ambiente de de
 
 ## 2. Extensiones de Backend
 
-### **IA y Asistentes de Desarrollo**
-- **Amazon Q** (`amazonwebservices.amazon-q-vscode`)
-  - Asistente de IA de AWS para código, arquitectura y servicios en la nube
-- **GitHub Copilot** (`github.copilot`)
-  - Autocompletado de código impulsado por IA
-- **GitHub Copilot Chat** (`github.copilot-chat`)
-  - Chat para asistencia, preguntas y explicación de código
-
 ### **AWS y Nube**
 - **AWS Toolkit** (`amazonwebservices.aws-toolkit-vscode`)
   - Integración directa con servicios AWS (Lambda, SAM, CloudFormation)
