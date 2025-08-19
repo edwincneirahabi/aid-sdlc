@@ -7,81 +7,99 @@ globs: **/*.css, **/*.tsx, **/*.jsx, tailwind.config.js, tailwind.config.ts
 
 ## Project Setup
 
-- Use proper Tailwind configuration
-- Configure theme extension properly
-- Set up proper purge configuration
-- Use proper plugin integration
-- Configure custom spacing and breakpoints
-- Set up proper color palette
+- **Tailwind v4**: usar la sintaxis moderna (imports y `@theme`).
+- **Tokens semánticos**: definir tokens (`--color-*`, `--radius-*`, `--font-*`) alineados a Keychain.
+- **Purge**: Tailwind v4 hace tree‑shaking automático; evita CSS global innecesario.
+- **Plugins**: incluir solo los mínimos requeridos por el DS.
+- **Breakpoints/spacing**: centralizados como tokens.
+- **Paleta**: mapear escalas a los tokens semánticos.
 
 ## Component Styling
 
-- Use utility classes over custom CSS
-- Group related utilities with @apply when needed
-- Use proper responsive design utilities
-- Implement dark mode properly
-- Use proper state variants
-- Keep component styles consistent
+- **Utilities primero**; `@apply` solo para patrones repetidos.
+- **Responsive**: mobile‑first con prefijos `sm/md/lg/xl/2xl`.
+- **Dark mode**: con media query o `class`; preferir tokens para colores.
+- **Variants**: usar `hover: focus: disabled: data-*` de forma explícita.
+- **Consistencia**: variantes y tamaños acordados por Keychain.
 
 ## Layout
 
-- Use Flexbox and Grid utilities effectively
-- Implement proper spacing system
-- Use container queries when needed
-- Implement proper responsive breakpoints
-- Use proper padding and margin utilities
-- Implement proper alignment utilities
+- Flex y Grid con utilidades; sin CSS personalizado salvo excepciones.
+- Espaciado guiado por tokens.
+- Container queries cuando aporte a layouts complejos.
+- Breakpoints del DS.
+- Padding/margin utilitarios, evitar clases ad‑hoc.
+- Alineación con utilidades (`items-`, `justify-`, `content-`).
 
 ## Typography
 
-- Use proper font size utilities
-- Implement proper line height
-- Use proper font weight utilities
-- Configure custom fonts properly
-- Use proper text alignment
-- Implement proper text decoration
+- Tamaños y `leading` del DS.
+- Pesos tipográficos consistentes.
+- Fuentes vía `next/font`; exponer en tokens `--font-*`.
+- Alineación y decoraciones utilitarias.
 
 ## Colors
 
-- Use semantic color naming
-- Implement proper color contrast
-- Use opacity utilities effectively
-- Configure custom colors properly
-- Use proper gradient utilities
-- Implement proper hover states
+- Nombres semánticos (`--color-primary`, `--color-accent`, etc.).
+- Contraste AA como mínimo.
+- Opacidades con utilidades; no redefinir colores.
+- Gradientes y hovers alineados a Keychain.
 
 ## Components
 
-- Use shadcn/ui components when available
-- Extend components properly
-- Keep component variants consistent
-- Implement proper animations
-- Use proper transition utilities
-- Keep accessibility in mind
+- Preferir librería del DS (Keychain). shadcn/ui solo si está aprobado.
+- Extender componentes manteniendo variantes.
+- Animaciones/transition utilitarias; reduce custom CSS.
+- Accesibilidad: roles/aria y foco visible.
 
 ## Responsive Design
 
-- Use mobile-first approach
-- Implement proper breakpoints
-- Use container queries effectively
-- Handle different screen sizes properly
-- Implement proper responsive typography
-- Use proper responsive spacing
+- Enfoque mobile‑first.
+- Breakpoints únicos del DS.
+- Container queries según necesidad.
+- Tipografía/espaciado responsivo con utilidades.
 
 ## Performance
 
-- Use proper purge configuration
-- Minimize custom CSS
-- Use proper caching strategies
-- Implement proper code splitting
-- Optimize for production
-- Monitor bundle size
+- Tree‑shaking de Tailwind v4.
+- Minimizar CSS a medida.
+- Code splitting por rutas Next.
+- Optimizar assets y fuentes (`next/font`).
+- Vigilar tamaño del bundle.
 
 ## Best Practices
 
-- Follow naming conventions
-- Keep styles organized
-- Use proper documentation
-- Implement proper testing
-- Follow accessibility guidelines
-- Use proper version control
+- Convenciones del DS.
+- Documentar patrones en Storybook (si aplica).
+- Testing visual/E2E para estados y variantes.
+- Accesibilidad: WCAG AA objetivo.
+- Versionado con cambios del DS controlados.
+
+## Configuración mínima (Tailwind v4 + Keychain)
+
+```css
+/* src/app/globals.css */
+@import 'tailwindcss';
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #0ea5e9;
+  --color-accent: #22c55e;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --font-sans: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { --background: #0a0a0a; --foreground: #ededed; }
+}
+
+body { background: var(--background); color: var(--foreground); }
+```
