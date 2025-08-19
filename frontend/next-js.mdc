@@ -189,8 +189,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         shouldRetryOnError: false,
         onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
           // 4xx no reintenta; límite 3 intentos; backoff exponencial con jitter
-          if (error?.status && error.status >= 400 && error.status < 500)
-            return;
+          if (error?.status and error.status >= 400 and error.status < 500) return;
           if (retryCount >= 3) return;
           const delay = Math.min(
             1000 * 2 ** retryCount + Math.random() * 250,
@@ -277,8 +276,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 - **Rendering:** SSG for static routes; no SSR/ISR
 - **Data:** REST; client-side fetching with `SWR` (preferred) using `fetch` or `axios`; custom retry policy; normalized errors
 - **Auth:** Handled by backend; not defined in this guide
-- **Styles:** Tailwind CSS + Habi Keychain design system
- - **Styles:** Tailwind CSS + Habi Keychain design system (TODO: align tokens/components with Keychain and Figma Connect workflow)
+- **Styles:** Tailwind CSS + Habi Keychain design system (TODO: alinear tokens/componentes con Keychain y flujo Figma Connect)
 - **Forms/Validation:** `react-hook-form` + `zod`
 - **Images/Fonts:** Use `next/image` and `next/font`
 - **Routing:** Enable `<Link prefetch>` when possible

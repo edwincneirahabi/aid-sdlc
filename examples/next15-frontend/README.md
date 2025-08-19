@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next 15 Frontend Example (SSG)
 
-## Getting Started
+Ejemplo mínimo de frontend con Next.js 15 (App Router), SSG (`output: "export"`), Tailwind v4, alias
+`@/*`, y SWR provider.
 
-First, run the development server:
+## Requisitos
+
+- Node 18+
+- npm / pnpm (este ejemplo usa npm)
+
+## Comandos
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev       # desarrollo (Turbopack)
+npm run build     # build SSG (out/)
+npm start         # sirve la carpeta out/ localmente
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuración clave
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `next.config.ts`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  - `output: 'export'`, `images.unoptimized: true`
+  - `trailingSlash: true` (recomendado para S3/CloudFront)
+  - `basePath` opcional vía `NEXT_PUBLIC_BASE_PATH`
 
-## Learn More
+- `tsconfig.json`:
 
-To learn more about Next.js, take a look at the following resources:
+  - `strict: true`, alias `@/*` a `src/*`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app/layout.tsx` y `src/app/providers.tsx`:
+  - Provider de SWR global (cliente)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Variables de entorno
 
-## Deploy on Vercel
+Crear `.env.local` si necesitas subruta:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+NEXT_PUBLIC_BASE_PATH=/tu-subruta
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## TODOs
+
+- Integración DevOps (deploy a S3 + CloudFront, invalidaciones y cache policies) — documentar en PR
+  futuro
+- Alineación de tokens con Keychain + Figma Connect (ver guía Tailwind)
