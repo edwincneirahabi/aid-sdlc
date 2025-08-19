@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -10,8 +10,8 @@
   --color-foreground: var(--foreground);
   /* Habi Keychain: semantic tokens (adjust in product repo) */
   --color-primary: #0ea5e9; /* sky-500 */
-  --color-accent: #22c55e;  /* green-500 */
-  --color-muted: #f1f5f9;   /* slate-100 */
+  --color-accent: #22c55e; /* green-500 */
+  --color-muted: #f1f5f9; /* slate-100 */
 
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;

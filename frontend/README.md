@@ -1,6 +1,7 @@
 # Guías de Frontend (Habi)
 
-Este directorio consolida las guías del stack de frontend de Habi. Aplica a proyectos Next.js 15 (App Router) entregados como frontend estático (SSG) en S3 + CloudFront.
+Este directorio consolida las guías del stack de frontend de Habi. Aplica a proyectos Next.js 15
+(App Router) entregados como frontend estático (SSG) en S3 + CloudFront.
 
 ## Stack y convenciones
 
@@ -24,7 +25,8 @@ Este directorio consolida las guías del stack de frontend de Habi. Aplica a pro
 
 ## TODOs pendientes
 
-- Integración DevOps de despliegue (SSG a S3 + CloudFront, invalidaciones, cache policies): documentar en PR futuro
+- Integración DevOps de despliegue (SSG a S3 + CloudFront, invalidaciones, cache policies):
+  documentar en PR futuro
 - Alineación completa con Keychain (tokens y componentes) + Figma Connect
 - Observabilidad (Sentry + source maps): documentar
 

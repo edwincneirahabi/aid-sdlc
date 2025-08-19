@@ -168,9 +168,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
         shouldRetryOnError: false,
         onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
           // 4xx no reintenta; límite 3 intentos; backoff exponencial con jitter
-          if (error?.status && error.status >= 400 && error.status < 500) return;
+          if (error?.status && error.status >= 400 && error.status < 500)
+            return;
           if (retryCount >= 3) return;
-          const delay = Math.min(1000 * 2 ** retryCount + Math.random() * 250, 8000);
+          const delay = Math.min(
+            1000 * 2 ** retryCount + Math.random() * 250,
+            8000
+          );
           setTimeout(() => revalidate({ retryCount }), delay);
         },
       }}
