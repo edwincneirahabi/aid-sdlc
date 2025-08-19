@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { Button } from "@/components/Button";
 import useSWR from "swr";
 
 export default function Home() {
@@ -54,6 +55,11 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+        <div className="flex gap-3">
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
         </div>
         <pre className="text-xs bg-black/5 dark:bg-white/10 rounded p-2">
           {JSON.stringify(data, null, 2)}
