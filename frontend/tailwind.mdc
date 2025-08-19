@@ -7,75 +7,75 @@ globs: **/*.css, **/*.tsx, **/*.jsx, tailwind.config.js, tailwind.config.ts
 
 ## Project Setup
 
-- **Tailwind v4**: usar la sintaxis moderna (imports y `@theme`).
-- **Tokens semánticos**: definir tokens (`--color-*`, `--radius-*`, `--font-*`) alineados a Keychain.
-- **Purge**: Tailwind v4 hace tree‑shaking automático; evita CSS global innecesario.
-- **Plugins**: incluir solo los mínimos requeridos por el DS.
-- **Breakpoints/spacing**: centralizados como tokens.
-- **Paleta**: mapear escalas a los tokens semánticos.
+- **Tailwind v4**: use modern syntax (imports and `@theme`).
+- **Semantic tokens**: define tokens (`--color-*`, `--radius-*`, `--font-*`) aligned with Keychain.
+- **Purge**: Tailwind v4 tree-shakes automatically; avoid unnecessary global CSS.
+- **Plugins**: include only what the design system requires.
+- **Breakpoints/spacing**: centralize as tokens.
+- **Palette**: map scales to semantic tokens.
 
 ## Component Styling
 
-- **Utilities primero**; `@apply` solo para patrones repetidos.
-- **Responsive**: mobile‑first con prefijos `sm/md/lg/xl/2xl`.
-- **Dark mode**: con media query o `class`; preferir tokens para colores.
-- **Variants**: usar `hover: focus: disabled: data-*` de forma explícita.
-- **Consistencia**: variantes y tamaños acordados por Keychain.
+- **Utilities first**; use `@apply` only for repeated patterns.
+- **Responsive**: mobile‑first with `sm/md/lg/xl/2xl` prefixes.
+- **Dark mode**: via media query or `class`; prefer tokens for colors.
+- **Variants**: use `hover:`, `focus:`, `disabled:`, `data-*` explicitly.
+- **Consistency**: variants and sizes must follow Keychain.
 
 ## Layout
 
-- Flex y Grid con utilidades; sin CSS personalizado salvo excepciones.
-- Espaciado guiado por tokens.
-- Container queries cuando aporte a layouts complejos.
-- Breakpoints del DS.
-- Padding/margin utilitarios, evitar clases ad‑hoc.
-- Alineación con utilidades (`items-`, `justify-`, `content-`).
+- Use Flex and Grid utilities; avoid custom CSS except for edge cases.
+- Spacing guided by tokens.
+- Container queries for complex layouts when valuable.
+- Use design-system breakpoints.
+- Prefer utility padding/margins; avoid ad‑hoc classes.
+- Alignment via utilities (`items-`, `justify-`, `content-`).
 
 ## Typography
 
-- Tamaños y `leading` del DS.
-- Pesos tipográficos consistentes.
-- Fuentes vía `next/font`; exponer en tokens `--font-*`.
-- Alineación y decoraciones utilitarias.
+- Sizes and `leading` from the design system.
+- Consistent font weights.
+- Fonts via `next/font`; expose through `--font-*` tokens.
+- Alignment and decorations via utilities.
 
 ## Colors
 
-- Nombres semánticos (`--color-primary`, `--color-accent`, etc.).
-- Contraste AA como mínimo.
-- Opacidades con utilidades; no redefinir colores.
-- Gradientes y hovers alineados a Keychain.
+- Semantic names (`--color-primary`, `--color-accent`, etc.).
+- Contrast at least AA.
+- Use opacity utilities; avoid redefining colors.
+- Gradients and hovers aligned with Keychain.
 
 ## Components
 
-- Preferir librería del DS (Keychain). shadcn/ui solo si está aprobado.
-- Extender componentes manteniendo variantes.
-- Animaciones/transition utilitarias; reduce custom CSS.
-- Accesibilidad: roles/aria y foco visible.
+- Prefer the DS library (Keychain). Use shadcn/ui only if approved.
+- Extend components preserving variants.
+- Prefer utility animations/transitions; minimize custom CSS.
+- Accessibility: proper roles/aria and visible focus.
 
 ## Responsive Design
 
-- Enfoque mobile‑first.
-- Breakpoints únicos del DS.
-- Container queries según necesidad.
-- Tipografía/espaciado responsivo con utilidades.
+- Mobile‑first approach.
+- Single source of breakpoints from the DS.
+- Container queries as needed.
+- Responsive typography/spacing via utilities.
 
 ## Performance
 
-- Tree‑shaking de Tailwind v4.
-- Minimizar CSS a medida.
-- Code splitting por rutas Next.
-- Optimizar assets y fuentes (`next/font`).
-- Vigilar tamaño del bundle.
+- Tailwind v4 tree‑shaking.
+- Minimize custom CSS.
+- Route‑level code splitting with Next.
+- Optimize assets and fonts (`next/font`).
+- Monitor bundle size.
 
 ## Best Practices
 
-- Convenciones del DS.
-- Documentar patrones en Storybook (si aplica).
-- Testing visual/E2E para estados y variantes.
-- Accesibilidad: WCAG AA objetivo.
-- Versionado con cambios del DS controlados.
+- Follow DS conventions.
+- Document patterns in Storybook (if applicable).
+- Visual/E2E tests for states and variants.
+- Accessibility: target WCAG AA.
+- Version control: manage DS changes carefully.
 
-## Configuración mínima (Tailwind v4 + Keychain)
+## Minimal setup (Tailwind v4 + Keychain)
 
 ```css
 /* src/app/globals.css */
@@ -98,8 +98,21 @@ globs: **/*.css, **/*.tsx, **/*.jsx, tailwind.config.js, tailwind.config.ts
 }
 
 @media (prefers-color-scheme: dark) {
-  :root { --background: #0a0a0a; --foreground: #ededed; }
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
-body { background: var(--background); color: var(--foreground); }
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
 ```
+
+## TODO
+
+- Align Tailwind tokens and components with Habi Keychain design system.
+- Integrate Figma Connect to sync Keychain tokens and components into code.
+- Define mapping between Figma design tokens and CSS variables (`--color-*`, `--radius-*`, `--font-*`).
+- Establish versioning and update workflow (Figma → Keychain → codebase) and document it here.

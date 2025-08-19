@@ -110,7 +110,7 @@ This document outlines best practices for developing Next.js applications, focus
 - **Memoization:** Use `React.memo` to prevent unnecessary re-renders of components.
 - **Prefetching:** Use the `<Link prefetch>` tag to prefetch pages that are likely to be visited.
 - **SSG only:** Prefer Static Site Generation for deploys to S3 + CloudFront. Do not use SSR or ISR.
- - **trailingSlash y basePath:** Configura `trailingSlash: true` para que S3/CloudFront sirvan carpetas (`/about/ -> /about/index.html`). Usa `basePath` si necesitas un sub-path (por ejemplo `/onboarding`). Ver: [trailingSlash](https://nextjs.org/docs/app/api-reference/config/next-config-js/trailingSlash), [basePath](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath).
+- **trailingSlash y basePath:** Configura `trailingSlash: true` para que S3/CloudFront sirvan carpetas (`/about/ -> /about/index.html`). Usa `basePath` si necesitas un sub-path (por ejemplo `/onboarding`). Ver: [trailingSlash](https://nextjs.org/docs/app/api-reference/config/next-config-js/trailingSlash), [basePath](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath).
 
 ### Memory Management
 
@@ -175,22 +175,27 @@ Authentication is handled by the backend and is out of scope for this guide.
 - **Ejemplo:**
 
 ```tsx
-"use client";
-import { SWRConfig } from "swr";
+'use client';
+import { SWRConfig } from 'swr';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SWRConfig
       value={{
-        fetcher: (resource, init) => fetch(resource as RequestInfo, init).then(r => r.json()),
+        fetcher: (resource, init) =>
+          fetch(resource as RequestInfo, init).then((r) => r.json()),
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
         shouldRetryOnError: false,
         onErrorRetry: (error, _key, _config, revalidate, { retryCount }) => {
           // 4xx no reintenta; límite 3 intentos; backoff exponencial con jitter
-          if (error?.status && error.status >= 400 && error.status < 500) return;
+          if (error?.status && error.status >= 400 && error.status < 500)
+            return;
           if (retryCount >= 3) return;
-          const delay = Math.min(1000 * 2 ** retryCount + Math.random() * 250, 8000);
+          const delay = Math.min(
+            1000 * 2 ** retryCount + Math.random() * 250,
+            8000
+          );
           setTimeout(() => revalidate({ retryCount }), delay);
         },
       }}
@@ -273,6 +278,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 - **Data:** REST; client-side fetching with `SWR` (preferred) using `fetch` or `axios`; custom retry policy; normalized errors
 - **Auth:** Handled by backend; not defined in this guide
 - **Styles:** Tailwind CSS + Habi Keychain design system
+ - **Styles:** Tailwind CSS + Habi Keychain design system (TODO: align tokens/components with Keychain and Figma Connect workflow)
 - **Forms/Validation:** `react-hook-form` + `zod`
 - **Images/Fonts:** Use `next/image` and `next/font`
 - **Routing:** Enable `<Link prefetch>` when possible
