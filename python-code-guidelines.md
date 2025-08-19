@@ -479,6 +479,10 @@ def divide_numbers(dividend: float, divisor: float) -> Optional[float]:
 
 ---
 
+## Testing y cobertura
+
+**IMPORTANTE**: Ver la estrategia de testing y cobertura en el documento/regla testing.md
+
 ## Pre-commit hooks
 
 **Configuración obligatoria**: Todos los proyectos deben configurar pre-commit hooks para ejecutar
