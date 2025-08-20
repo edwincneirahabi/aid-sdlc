@@ -32,6 +32,8 @@ información de forma modular.
 
 - [architecture.md](architecture.md) – Describe la estructura y componentes del sistema, cómo
   interactúan y las decisiones técnicas que guían su evolución.
+- [arquitecture-data-analytics.md](arquitecture-data-analytics.md) – Describe la estructura y componentes del sistema, cómo
+  interactúan y las decisiones técnicas que guían su evolución para los proyectos en gcp de analitica y data
 - [database.md](database.md) – Documenta las estructuras de datos persistentes, sus campos, tipos,
   relaciones y convenciones de modelado utilizadas.
 - [database-er.md](database-er.md) – Incluye diagramas que representan visualmente tablas, campos y
