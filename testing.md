@@ -297,7 +297,7 @@ def mock_boto3_client(mocker):
 ```
 
 
-## 6. Testing en Frontend (Next.js)
+## 6. Testing en Frontend
 
 ### 6.1 Tipos de Testing
 
@@ -316,14 +316,13 @@ def mock_boto3_client(mocker):
 #### End-to-end (E2E) Testing
 - Implementar tests E2E usando Playwright
 - Cubrir flujos críticos de la aplicación
-- Validar la experiencia del usuario completa
 - Probar en múltiples navegadores y dispositivos
-- Probar flujos completos de usuario
 - Validar interacción entre componentes
 - Verificar integración con APIs
 - Comprobar manejo de errores de red
 - Validar estados de carga
 - Probar casos límite de integración
+- Validar la experiencia del usuario completa
 
 ### 6.2 Organización y Estructura
 
@@ -366,10 +365,23 @@ src/
 - Validar comportamiento en lugar de implementación
 - Incluir pruebas de accesibilidad
 
-#### Consideraciones Especiales
+### Performance en Tests**:
+- Agrupar tests similares para reducir setup
+- Usar `beforeAll` para configuración costosa
+- Implementar cleanup efectivo
+- Evitar tests innecesariamente lentos
+- Usar mocks para operaciones costosas
+- Implementar test sharding en CI
+- Mantener tests DRY usando helpers y fixtures
+ - Documentar casos complejos o no obvios
+- Mantener tests actualizados con el código
+- Refactorizar tests cuando sea necesario
+
+#### Consideraciones Especiales a tener en cuenta
 - Probar manejo de errores y casos borde
 - Validar responsividad y compatibilidad cross-browser
 - Verificar el manejo de estructuras de datos complejas
 - Asegurar la seguridad en el cliente (no exponer tokens/keys)
+- **IMPORTANTE** Priorizar código crítico para el negocio
 
 Este documento debe ser seguido estrictamente por todos los desarrolladores y copilotos IA para garantizar la consistencia y calidad de los tests en el proyecto.
