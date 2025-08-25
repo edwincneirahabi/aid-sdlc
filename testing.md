@@ -297,4 +297,256 @@ def mock_boto3_client(mocker):
 ```
 
 
+## 5. Guía para Testing en Frontend
+
+### 5.1 Estructura de Tests
+
+La organización de los tests debe reflejar la estructura del código fuente para facilitar el mantenimiento y la navegación:
+
+```
+tests/
+├── __mocks__/           # Mocks globales y configuración
+├── app/                 # Tests de páginas/rutas
+├── components/          # Tests de componentes
+├── services/           # Tests de servicios/APIs
+├── utils/              # Tests de utilidades
+└── e2e/                # Tests end-to-end
+```
+
+### 5.2 Herramientas y Setup
+
+- **Jest**: Framework principal de testing
+- **React Testing Library**: Para testing de componentes React
+- **Playwright**: Para tests e2e
+- **MSW (Mock Service Worker)**: Para mockear llamadas API
+- **jest-dom**: Para assertions específicas de DOM
+
+### 5.3 Tipos de Tests
+
+#### Tests Unitarios
+```typescript
+describe('ComponentName', () => {
+  it('should render correctly', () => {
+    render(<ComponentName prop="value" />);
+    expect(screen.getByText('Expected Text')).toBeInTheDocument();
+  });
+
+  it('should handle user interactions', () => {
+    render(<ComponentName />);
+    fireEvent.click(screen.getByRole('button'));
+    expect(screen.getByText('New State')).toBeInTheDocument();
+  });
+});
+```
+
+#### Tests de Integración
+```typescript
+describe('FormFlow', () => {
+  it('should complete form submission flow', async () => {
+    render(<FormComponent />);
+    
+    // Fill form
+    await userEvent.type(screen.getByLabelText('Name'), 'John Doe');
+    
+    // Submit
+    fireEvent.click(screen.getByText('Submit'));
+    
+    // Verify success state
+    expect(await screen.findByText('Success')).toBeInTheDocument();
+  });
+});
+```
+
+#### Tests E2E
+```typescript
+test('user can complete checkout flow', async ({ page }) => {
+  await page.goto('/checkout');
+  await page.fill('[name="card-number"]', '4242424242424242');
+  await page.click('button[type="submit"]');
+  await expect(page.locator('.success-message')).toBeVisible();
+});
+```
+
+### 5.4 Buenas Prácticas
+
+1. **Naming y Organización**:
+   - Usar nombres descriptivos y consistentes: `ComponentName.test.tsx`
+   - Agrupar tests relacionados en bloques `describe` significativos
+   - Usar descripciones claras en los `it/test` que expliquen el comportamiento esperado
+   - Mantener una estructura de carpetas espejo del código fuente
+
+2. **Mocking**:
+   - Mockear solo lo estrictamente necesario para el test
+   - Mantener mocks cerca del código que los usa (en el mismo archivo o carpeta)
+   - Usar mocks consistentes en todo el proyecto
+   - Centralizar mocks comunes en `__mocks__`
+   - Documentar el propósito y comportamiento de cada mock
+   - Resetear mocks entre tests usando `beforeEach`
+   - Evitar mocks innecesariamente complejos
+
+3. **Assertions y Queries**:
+   - Preferir queries por rol o texto sobre selectores CSS/data-testid
+   - Validar estados accesibles y visibles
+   - Verificar comportamiento, no implementación
+   - Incluir assertions negativos (lo que NO debe ocurrir)
+   - Validar mensajes de error y estados de carga
+   - Comprobar la presencia de clases CSS críticas
+
+4. **Manejo de Asincronía**:
+   - Usar `findBy` para elementos que aparecen asincrónicamente
+   - Implementar timeouts razonables y consistentes
+   - Usar `waitFor` para condiciones complejas
+   - NO USAR `setTimeout` en tests
+   - Manejar race conditions en tests
+   - Simular latencia en llamadas API cuando sea relevante
+
+5. **Testing de Estado**:
+   - Validar cambios de estado después de acciones
+   - Verificar persistencia de estado cuando corresponda
+   - Probar efectos secundarios
+   - Validar inicialización de estado
+   - Comprobar cleanup de efectos
+   - Verificar manejo de errores en el estado
+
+6. **Testing de Eventos**:
+   - Simular eventos de usuario realistas
+   - Validar propagación de eventos
+   - Probar eventos de teclado y mouse
+   - Verificar event handlers
+   - Comprobar prevención de eventos por defecto
+   - Validar eventos personalizados
+
+7. **Testing de Integración**:
+   - Probar flujos completos de usuario
+   - Validar interacción entre componentes
+   - Verificar integración con APIs
+   - Comprobar manejo de errores de red
+   - Validar estados de carga
+   - Probar casos límite de integración
+
+8. **Performance en Tests**:
+   - Agrupar tests similares para reducir setup
+   - Usar `beforeAll` para configuración costosa
+   - Implementar cleanup efectivo
+   - Evitar tests innecesariamente lentos
+   - Usar mocks para operaciones costosas
+   - Implementar test sharding en CI
+
+9. **Mantenibilidad**:
+    - Mantener tests DRY usando helpers y fixtures
+    - Documentar casos complejos o no obvios
+    - Mantener tests actualizados con el código
+    - Eliminar tests obsoletos
+    - Refactorizar tests cuando sea necesario
+    - Mantener una cobertura mínima del 80%
+
+### 5.5 Testing de Componentes
+
+```typescript
+// Button.test.tsx
+describe('Button', () => {
+  it('renders with correct text', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+  });
+
+  it('calls onClick when clicked', () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    fireEvent.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('is disabled when loading', () => {
+    render(<Button loading>Click me</Button>);
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+});
+```
+
+### 5.6 Testing de Hooks
+
+```typescript
+// useCounter.test.ts
+import { renderHook, act } from '@testing-library/react-hooks';
+
+describe('useCounter', () => {
+  it('should increment counter', () => {
+    const { result } = renderHook(() => useCounter());
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.count).toBe(1);
+  });
+});
+```
+
+### 5.7 Testing de Formularios
+
+```typescript
+describe('Form', () => {
+  it('validates required fields', async () => {
+    render(<Form />);
+    fireEvent.click(screen.getByText('Submit'));
+    expect(await screen.findByText('Name is required')).toBeInTheDocument();
+  });
+
+  it('submits form with valid data', async () => {
+    const onSubmit = jest.fn();
+    render(<Form onSubmit={onSubmit} />);
+    
+    await userEvent.type(screen.getByLabelText('Name'), 'John');
+    await userEvent.type(screen.getByLabelText('Email'), 'john@example.com');
+    
+    fireEvent.click(screen.getByText('Submit'));
+    
+    expect(onSubmit).toHaveBeenCalledWith({
+      name: 'John',
+      email: 'john@example.com'
+    });
+  });
+});
+```
+
+### 5.8 Testing de Servicios/APIs
+
+```typescript
+describe('UserService', () => {
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
+
+  it('fetches user data successfully', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ id: 1, name: 'John' }));
+    
+    const user = await UserService.getUser(1);
+    expect(user).toEqual({ id: 1, name: 'John' });
+  });
+
+  it('handles API errors gracefully', async () => {
+    fetchMock.mockRejectOnce(new Error('API Error'));
+    
+    await expect(UserService.getUser(1)).rejects.toThrow('API Error');
+  });
+});
+```
+
+### 5.9 Cobertura de Tests
+
+- Mantener una cobertura mínima del 80%
+- Enfocarse en la calidad sobre la cantidad
+- Priorizar código crítico para el negocio
+- Usar herramientas de cobertura integradas con CI/CD
+
+### 5.10 Recomendaciones Adicionales
+
+1. **Mantenimiento**:
+   - Eliminar tests obsoletos
+   - Mantener documentación actualizada
+
+2. **Performance**:
+   - Agrupar tests similares
+   - Usar setup/teardown efectivamente
+
+
 Este documento debe ser seguido estrictamente por todos los desarrolladores y copilotos IA para garantizar la consistencia y calidad de los tests en el proyecto.
