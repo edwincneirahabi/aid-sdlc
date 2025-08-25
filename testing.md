@@ -305,11 +305,23 @@ La organización de los tests debe reflejar la estructura del código fuente par
 
 ```
 tests/
-├── __mocks__/           # Mocks globales y configuración
-├── app/                 # Tests de páginas/rutas
-├── components/          # Tests de componentes
-├── services/           # Tests de servicios/APIs
-├── utils/              # Tests de utilidades
+├── components/          # Componentes y sus tests
+│   ├── Button/
+│   │   ├── Button.tsx
+│   │   └── Button.test.tsx
+│   └── Card/
+│       ├── Card.tsx
+│       └── Card.test.tsx
+├── pages/              # Páginas y sus tests
+│   ├── Home/
+│   │   ├── Home.tsx
+│   │   └── Home.test.tsx
+│   └── About/
+│       ├── About.tsx
+│       └── About.test.tsx
+├── services/           # Servicios y sus tests
+│   ├── api.ts
+│   └── api.test.ts
 └── e2e/                # Tests end-to-end
 ```
 
@@ -371,6 +383,7 @@ test('user can complete checkout flow', async ({ page }) => {
 
 1. **Naming y Organización**:
    - Usar nombres descriptivos y consistentes: `ComponentName.test.tsx`
+   - Colocar los archivos de test `.test.tsx` en la misma carpeta que el componente que prueban para mantener la lógica y UI juntos
    - Agrupar tests relacionados en bloques `describe` significativos
    - Usar descripciones claras en los `it/test` que expliquen el comportamiento esperado
    - Mantener una estructura de carpetas espejo del código fuente
